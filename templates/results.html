@@ -1,0 +1,11 @@
+{% extends "search.html" %}
+
+{% block results %}
+  <ul>
+    {% for song in api_data["response"]["songs"] %}
+      <li>
+        <h3>{{ song.artist_name }} - {{ song.title }}</h3>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
