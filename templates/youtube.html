@@ -2,8 +2,18 @@
 {% extends "search.html" %}
 
 {% block youtube %}
-  <script>
-  </script>
-  <iframe style="display: none" width="560" height="315" src="https://www.youtube.com/embed/{{ api_data }}?autoplay=1" frameborder="0" allowfullscreen></iframe>
+
+
+  <iframe id="my-video" style="display: ''" width="560" height="315" src="https://www.youtube.com/embed/{{ api_data }}?autoplay=1"
+        frameborder="0" allowfullscreen></iframe>
+
+  <div id="control_div">
+
+    <button id="play" type="button" onclick="play_video()">Play</button>
+    <button id="pause" type="button" onclick="pause_video()">Pause</button>
+    <button id="stop" type="button" onclick="stop_video()">Stop</button>
+
+  </div>
+
 
 {% endblock %}
