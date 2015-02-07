@@ -1,11 +1,29 @@
 {% extends "search.html" %}
 
 {% block results %}
-  <ul>
-    {% for song in api_data["response"]["songs"] %}
-      <li>
-        <h3>{{ song.artist_name }} - {{ song.title }}</h3>
-      </li>
-    {% endfor %}
-  </ul>
+
+  <script type="text/javascript">
+  function submitform(artist, title)
+  {
+      console.log(artist);
+      console.log(title);
+      document.getElementById('artist_name').value = artist;
+      document.getElementById('song_name').value = title;
+      document.myform.submit();
+  }
+  </script>
+
+  <form name="myform"  action="/play_music" method="post">
+    <input type='hidden' id='artist_name' name='artist_name' />
+    <input type='hidden' id='song_name' name='song_name' />
+    <ul>
+      {% for song in api_data["response"]["songs"] %}
+        <li>
+          <a href="#" onClick="javascript:submitform('{{ song.artist_name }}', '{{ song.title }}');">{{ song.artist_name }} - {{ song.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </form>
+
 {% endblock %}
