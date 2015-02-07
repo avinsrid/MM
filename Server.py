@@ -12,11 +12,6 @@ class Server:
     CONST_PORT = 5000;
     CONST_HOST = '0.0.0.0';
 
-    genre_list = {"blues":True, "jazz":True, "rock":True, "metal":True, "heavy metal":True, "r&b":True, "reggae":True, "hiphop":True, "dance":True, "electro":True, "pop":True, "house":True}
-    environment_list = {"Library":True, "Room":True, "Car":True}
-    action_list = {"Studying":True, "Sleeping":True, "Driving":True}
-    genre_mood = {"Library-Studying": ["blues", "jazz", "reggae"], "Room-Sleeping": ["jazz", "blues", "rock"], "Car-Driving": ["dance", "hiphop", "house"]}
-
     def __init__(self):
       self.app.config['DEBUG'] = True # Disable me in Deployment
 
@@ -52,10 +47,17 @@ class Server:
 
         self.app.run(host=hostID, port=portNo);
 
-    @app.route('/getPlayList', methods=["GET"])
-    def GiveGenre():
-        if user_environment in environment_list:
-            user_mood = request.form["environment"] + '-' + request.form["activity"];
+    @app.route('/getPlayList/<environment>/<activity>', methods=["GET"])
+    def GiveGenre(environment, activity):
+
+        genre_list = {"blues":True, "jazz":True, "rock":True, "metal":True, "heavy metal":True, "r&b":True, "reggae":True, "hiphop":True, "dance":True, "electro":True, "pop":True, "house":True}
+        environment_list = {"Library":True, "Room":True, "Car":True}
+        action_list = {"Studying":True, "Sleeping":True, "Driving":True}
+        genre_mood = {"Library-Studying": ["blues", "jazz", "reggae"], "Room-Sleeping": ["jazz", "blues", "rock"], "Car-Driving": ["dance", "hiphop", "house"]}
+
+        if environment in environment_list:
+            # user_mood = request.form["environment"] + '-' + request.form["activity"];
+            user_mood = environment + '-' + activity;
             genre = random.choice(genre_mood[user_mood]);
             echoNest = EchoNest();
             data_json = echoNest.get_playlist(genre);
