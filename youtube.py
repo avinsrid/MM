@@ -6,7 +6,7 @@ import requests
 class Youtube:
 
 	base_url = "https://www.googleapis.com/youtube/v3/search?part=id&q="
-	auth_key = "&key=AIzaSyAeKbab6aWGaO1u2L1UyTpJjTqVZSzA7pE"
+	auth_key = "&key=#######################################"
 
 	def obtain_video_id(self, artist_name, song_name):
 		final_url = self.base_url + artist_name + "-" + song_name + self.auth_key
