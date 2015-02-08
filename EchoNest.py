@@ -6,7 +6,7 @@ import requests
 class EchoNest:
 
     base_url = "http://developer.echonest.com/api/v4/song/search?";
-    auth_key = "&api_key=JFORRE0YYTK6BRWG9";
+    auth_key = "&api_key=###################";
 
     def get_playlist(self, user_search):
 
